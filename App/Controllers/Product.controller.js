@@ -66,7 +66,7 @@ exports.delete = function (req, res) {
 
 
 exports.update = function (req, res) {
-    const id = req.params.id; // Lấy id từ URL
+    const id = req.body.id; // Lấy id từ list
     const data = req.body;    // Lấy dữ liệu cập nhật từ client
 
     // Gọi hàm update từ model

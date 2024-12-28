@@ -35,7 +35,7 @@ exports.add = function (req, res) {
 }
 
 exports.delete = function (req, res) {
-    const id = req.params.id;
+    const id = req.body.id;
     BrandModel.remove(id, function (err, result) {
         if (err) {
             res.status(500).send({ error: "Không thể xóa thương hiệu." });
@@ -55,7 +55,7 @@ exports.delete = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    const id = req.params.id;
+    const id = req.body.id;
     const data = req.body;
 
     // Kiểm tra dữ liệu đầu vào

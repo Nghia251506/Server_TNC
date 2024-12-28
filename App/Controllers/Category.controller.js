@@ -38,7 +38,7 @@ exports.add = function (req, res) {
 
 
 exports.delete = function (req, res) {
-    const id = req.params.id;
+    const id = req.body.id;
     ProductModel.remove(id, function (err, result) {
         if (err) {
             res.status(500).send({ error: "Không thể xóa loại sản phẩm." });
@@ -59,7 +59,7 @@ exports.delete = function (req, res) {
 
 
 exports.update = function (req, res) {
-    const id = req.params.id; // Lấy id từ URL
+    const id = req.body.id; // Lấy id từ URL
     const data = req.body;    // Lấy dữ liệu cập nhật từ client
 
     // Gọi hàm update từ model
