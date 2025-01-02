@@ -1,9 +1,8 @@
 const BrandModel = require('../Models/Brand.model');
 
-
 exports.list = function (req, res) {
     BrandModel.get_all(function (data) {
-            res.send({ result: data });
+            res.send(data);
     });
 }
 

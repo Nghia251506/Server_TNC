@@ -2,10 +2,9 @@ const ProductModel = require("../Models/Product.model");
 
 exports.list = function (req, res) {
     ProductModel.get_all(function (data) {
-        res.send(data); // Gửi trực tiếp mảng sản phẩm
+        res.send(data); // Gửi trực tiếp mảng loai sản phẩm
     });
 };
-
 
 exports.detail = function (req, res) {
     const id = req.params.id;
@@ -66,7 +65,7 @@ exports.delete = function (req, res) {
 
 
 exports.update = function (req, res) {
-    const id = req.body.id; // Lấy id từ list
+    const id = req.params.id; // Lấy id từ list
     const data = req.body;    // Lấy dữ liệu cập nhật từ client
 
     // Gọi hàm update từ model

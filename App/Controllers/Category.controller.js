@@ -1,8 +1,8 @@
 const CategoryModel = require("../Models/Category.model");
 
-exports.list = function (req, res) {
+exports.listCategory = function (req, res) {
     CategoryModel.get_all(function (data) {
-            res.send({ result: data });
+            res.send(data);
     });
 };
 
@@ -39,7 +39,7 @@ exports.add = function (req, res) {
 
 exports.delete = function (req, res) {
     const id = req.body.id;
-    ProductModel.remove(id, function (err, result) {
+    CategoryModel.remove(id, function (err, result) {
         if (err) {
             res.status(500).send({ error: "Không thể xóa loại sản phẩm." });
         } else if (result.affectedRows === 0) {
@@ -59,7 +59,7 @@ exports.delete = function (req, res) {
 
 
 exports.update = function (req, res) {
-    const id = req.body.id; // Lấy id từ URL
+    const id = req.body.id; // Lấy id từ form
     const data = req.body;    // Lấy dữ liệu cập nhật từ client
 
     // Gọi hàm update từ model

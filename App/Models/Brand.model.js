@@ -2,7 +2,7 @@ const conn = require('../common/connect');
 
 const Brand = function(brand){
     this.id = brand.id;
-    this.name = brand.name;
+    this.name = brand.brand_name;
 }
 
 Brand.get_all = function(result){
@@ -26,9 +26,9 @@ Brand.getById = function(id, result){
 }
 
 Brand.create = function(data, callback){
-    const query = "INSERT INTO brands (name) VALUES (?)"
+    const query = "INSERT INTO brands (brand_name) VALUES (?)"
     const params = [
-        data.name,
+        data.brand_name,
     ]
 
     conn.query(query, params, function(err, results){

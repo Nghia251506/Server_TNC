@@ -2,25 +2,25 @@ const conn = require('../common/connect');
 
 const Category = function (category) {
     this.id = category.id;
-    this.name = category.name;
+    this.name = category.category_name;
 };
 
 Category.get_all = function (result) {
-    conn.query("SELECT * FROM categories", function(err, product){
+    conn.query("SELECT * FROM categories", function(err, category){
         if (err) {
             result(null, err);
         } else {
-            result(product);
+            result(category);
         }
     });
 };
 
 Category.getById = function (id, result) {
-    conn.query(`SELECT * FROM categories WHERE id = ${id}`, function(err, product){
+    conn.query(`SELECT * FROM categories WHERE id = ${id}`, function(err, category){
         if (err) {
             return null;
         } else {
-            result(product);
+            result(category);
         }
     });
 };
