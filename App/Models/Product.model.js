@@ -24,6 +24,16 @@ Product.get_all = function (result) {
     });
 };
 
+Product.getProductByCategory = function (category_id,result){
+    conn.query(`SELECT * FROM products WHERE category_id = ${category_id}`, function(err, product){
+        if (err) {
+            result(null, err);
+        } else {
+            result(product);
+        }
+    });
+}
+
 Product.getById = function (id, result) {
     conn.query(`SELECT * FROM products WHERE id = ${id}`, function(err, product){
         if (err) {
@@ -73,7 +83,7 @@ Product.remove = function (id, callback) {
 
 
 Product.update = function (id, data, result) {
-    const query = `UPDATE products SET ? WHERE id = ?`;
+    const query = `UPDATE products SET name = ?, description = ?, price = ?, quantity = ?, category_id = ?, brand_id = ?, image_url = ? WHERE id = ${id}`;
 
     // Thực hiện truy vấn
     conn.query(query, [data, id], function (err, res) {

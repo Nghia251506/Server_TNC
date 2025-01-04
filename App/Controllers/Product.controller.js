@@ -6,6 +6,13 @@ exports.list = function (req, res) {
     });
 };
 
+exports.getProductByCategory = function (req, res){
+    const category_id = req.params.category_id;
+    ProductModel.getProductByCategory(category_id,function (data){
+        res.send({result: data});
+    })
+}
+
 exports.detail = function (req, res) {
     const id = req.params.id;
 
