@@ -47,13 +47,13 @@ Product.getById = function (id, result) {
 Product.create = function (data, callback) {
     const query = `CALL AddProductWithCode(?, ?, ?, ?, ?, ?, ?)`;
     const params = [
-        data.product_name,
-        data.product_description,
-        data.product_price,
-        data.product_quantity,
-        data.product_category_id,
-        data.product_brand_id,
-        data.product_image
+        data.name,
+        data.description,
+        data.price,
+        data.quantity,
+        data.category_id,
+        data.brand_id,
+        data.image_url
     ];
 
     conn.query(query, params, function (err, results) {
@@ -84,9 +84,18 @@ Product.remove = function (id, callback) {
 
 Product.update = function (id, data, result) {
     const query = `UPDATE products SET name = ?, description = ?, price = ?, quantity = ?, category_id = ?, brand_id = ?, image_url = ? WHERE id = ${id}`;
-
+    const values = [
+        data.name,
+        data.description,
+        data.price,
+        data.quantity,
+        data.category_id,
+        data.brand_id,
+        data.image_url,
+        id
+    ];
     // Thực hiện truy vấn
-    conn.query(query, [data, id], function (err, res) {
+    conn.query(query, values, function (err, res) {
         if (err) {
             console.error("Lỗi khi cập nhật sản phẩm:", err);
             result(err, null); // Trả lỗi về controller

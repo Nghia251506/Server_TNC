@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 const dotenv = require('dotenv').config();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3389;
 const cors = require('cors');
 app.use(cors());  // Cho phép tất cả các nguồn kết nối
 

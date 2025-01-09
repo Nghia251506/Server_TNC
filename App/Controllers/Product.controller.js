@@ -17,7 +17,7 @@ exports.detail = function (req, res) {
     const id = req.params.id;
 
     ProductModel.getById(id, function (data) {
-            res.send({ result: data });
+            res.send(data);
     });
 };
 
@@ -27,13 +27,13 @@ exports.add = function (req, res) {
 
     // Kiểm tra dữ liệu đầu vào
     if (
-        !data.product_name ||
-        !data.product_description ||
-        !data.product_price ||
-        !data.product_quantity ||
-        !data.product_category_id ||
-        !data.product_brand_id ||
-        !data.product_image
+        !data.name ||
+        !data.description ||
+        !data.price ||
+        !data.quantity ||
+        !data.category_id ||
+        !data.brand_id ||
+        !data.image_url
     ) {
         return res.status(400).send({ error: "Thiếu dữ liệu đầu vào" });
     }
@@ -74,6 +74,7 @@ exports.delete = function (req, res) {
 exports.update = function (req, res) {
     const id = req.params.id; // Lấy id từ list
     const data = req.body;    // Lấy dữ liệu cập nhật từ client
+    console.log("Received data:", data);
 
     // Gọi hàm update từ model
     ProductModel.update(id, data, function (err, result) {
