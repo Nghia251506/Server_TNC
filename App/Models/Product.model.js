@@ -15,7 +15,7 @@ const Product = function (product) {
 };
 
 Product.get_all = function (result) {
-    conn.query("SELECT p.id, p.code, p.name, p.price, p.quantity,p.image_url, p.description, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id", function(err, product){
+    conn.query("SELECT p.id, p.code, p.name, p.price, p.quantity,p.image_url, p.description, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
         if (err) {
             result(null, err);
         } else {
@@ -33,6 +33,19 @@ Product.getProductByCategory = function (category_id,result){
         }
     });
 }
+
+Product.findProductByCode = function (code, result) {
+    conn.query(`SELECT * FROM products WHERE code LIKE ?`, [`%${code}%`], function (err, products) {
+        if (err) {
+            return result(err, null); // Trả về lỗi qua callback
+        }
+        if (products.length === 0) {
+            return result(null, null); // Không tìm thấy sản phẩm, trả về null
+        }
+        return result(null, products); // Trả về sản phẩm đầu tiên
+    });
+};
+
 
 Product.getById = function (id, result) {
     conn.query(`SELECT * FROM products WHERE id = ${id}`, function(err, product){

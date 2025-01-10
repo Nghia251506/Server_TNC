@@ -13,6 +13,21 @@ exports.getProductByCategory = function (req, res){
     })
 }
 
+
+exports.getProductByCode = function(req, res) {
+    const code = req.body.code; // Lấy 'code' từ body của request
+    ProductModel.findProductByCode(code, function(err, data) {
+        if (err) {
+            return res.status(500).send({ error: "Lỗi khi tìm sản phẩm.", details: err });
+        }
+        if (!data || data.length === 0) {
+            return res.status(404).send({ message: "Không tìm thấy sản phẩm." });
+        }
+        res.status(200).send(data); // Trả về dữ liệu sản phẩm nếu tìm thấy
+    });
+};
+
+
 exports.detail = function (req, res) {
     const id = req.params.id;
 
@@ -69,6 +84,7 @@ exports.delete = function (req, res) {
         }
     });
 };
+
 
 
 exports.update = function (req, res) {

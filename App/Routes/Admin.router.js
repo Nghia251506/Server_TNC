@@ -15,4 +15,5 @@ module.exports = function(router){
     router.post('/admin/add-category', CategoryController.add);
     router.delete('/admin/delete-category', CategoryController.delete);
     router.put('/admin/update-category/:id', CategoryController.update);
+    router.post('/admin/findproductbycode', ProductControler.getProductByCode);
 }

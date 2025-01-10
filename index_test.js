@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // Import và thiết lập các router
 const clientRouter = require('./App/Routes/Client.router');
 const adminRouter = require('./App/Routes/Admin.router');
-// const loginRouter = require('./App/Routes/Authenticate.router');
+const loginRouter = require('./App/Routes/Authenticate.router');
 
 const router = express.Router();
 adminRouter(router);
@@ -25,7 +25,7 @@ clientRouter(router);
 
 // Sử dụng router chính
 app.use("/", router);
-// app.use("/login", loginRouter);
+app.use("/login", loginRouter);
 
 // Khởi chạy server
 app.listen(PORT, () => {

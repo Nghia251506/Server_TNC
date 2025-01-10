@@ -57,7 +57,7 @@ const login = async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    const redirectPath = user.role === 'admin' ? '/admin/dashboard' : '/client/home';
+    const redirectPath = user.role === 'admin' ? '/admin' : '/';
 
     res.status(200).json({ 
       message: 'Login successful', 
