@@ -25,7 +25,7 @@ exports.add = function (req, res) {
     // Gọi model để thêm thương hiệu
     BrandModel.create(data, function (err, result) {
         if (err) {
-            console.error("L��i khi tạo thương hiệu:", err);
+            console.error("Lỗi khi tạo thương hiệu:", err);
             res.status(500).send({ error: "Không thể tạo thương hiệu" });
         } else {
             res.status(201).send({ message: "Thương hiệu đã được tạo thành công", result });

@@ -2,6 +2,7 @@ module.exports = function(router){
     var ProductControler = require('../Controllers/Product.controller');
     var BrandController = require('../Controllers/Brand.controller');
     var CategoryController = require('../Controllers/Category.controller');
+    var BillController = require('../Controllers/Bill.controller');
     router.get('/admin/list-product', ProductControler.list);
     router.post('/admin/add-product', ProductControler.add);
     router.get('/admin/detail/:id', ProductControler.detail);
@@ -16,4 +17,6 @@ module.exports = function(router){
     router.delete('/admin/delete-category', CategoryController.delete);
     router.put('/admin/update-category/:id', CategoryController.update);
     router.post('/admin/findproductbycode', ProductControler.getProductByCode);
+    router.get('/admin/list-bill', BillController.list);
+    router.post('/admin/add-bill', BillController.add);
 }
