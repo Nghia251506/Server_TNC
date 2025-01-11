@@ -3,6 +3,7 @@ module.exports = function(router){
     var BrandController = require('../Controllers/Brand.controller');
     var CategoryController = require('../Controllers/Category.controller');
     var BillController = require('../Controllers/Bill.controller');
+    var BillDetailController = require('../Controllers/Bill_detail.controller');
     router.get('/admin/list-product', ProductControler.list);
     router.post('/admin/add-product', ProductControler.add);
     router.get('/admin/detail/:id', ProductControler.detail);
@@ -16,7 +17,9 @@ module.exports = function(router){
     router.post('/admin/add-category', CategoryController.add);
     router.delete('/admin/delete-category', CategoryController.delete);
     router.put('/admin/update-category/:id', CategoryController.update);
-    router.post('/admin/findproductbycode', ProductControler.getProductByCode);
+    router.post('/admin/add-bill', ProductControler.getProductByCode);
     router.get('/admin/list-bill', BillController.list);
     router.post('/admin/add-bill', BillController.add);
+    router.post('/admin/bill_detail', BillDetailController.addBillDetail);
+    router.get('/admin/bill_detail/:billId',BillDetailController.getBillDetailsByBillId);
 }
