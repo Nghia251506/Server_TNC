@@ -7,6 +7,14 @@ const Product = function (product) {
     this.description = product.description;
     this.price = product.price;
     this.quantity = product.quantity;
+    this.cpu = product.cpu;
+    this.ram = product.ram;
+    this.ssd = product.ssd;
+    this.hdd = product.hdd;
+    this.psu = product.psu;
+    this.mainboard = product.mainboard;
+    this.cases = product.cases;
+    this.heatsink = product.heatsink;
     this.category_id = product.category_id;
     this.brand_id = product.brand_id;
     this.create_at = product.create_at;
@@ -15,9 +23,7 @@ const Product = function (product) {
 };
 
 Product.get_all = function (result) {
-    const limit = 10;
-    const offset = 0;
-    conn.query(`SELECT p.id, p.code, p.name, p.price, p.quantity,p.image_url, p.description, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc`, function(err, product){
+    conn.query("SELECT p.*,ca.id, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON at.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
         if (err) {
             result(null, err);
         } else {
@@ -60,12 +66,20 @@ Product.getById = function (id, result) {
 };
 
 Product.create = function (data, callback) {
-    const query = `CALL AddProductWithCode(?, ?, ?, ?, ?, ?, ?)`;
+    const query = `CALL AddProductWithCode(? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)`;
     const params = [
         data.name,
         data.description,
         data.price,
         data.quantity,
+        data.cpu,
+        data.ram,
+        data.ssd,
+        data.hdd,
+        data.psu,
+        data.mainboard,
+        data.cases,
+        data.heatsink,
         data.category_id,
         data.brand_id,
         data.image_url
@@ -98,12 +112,20 @@ Product.remove = function (id, callback) {
 
 
 Product.update = function (id, data, result) {
-    const query = `UPDATE products SET name = ?, description = ?, price = ?, quantity = ?, category_id = ?, brand_id = ?, image_url = ? WHERE id = ${id}`;
+    const query = `UPDATE products SET name = ?, description = ?, price = ?, quantity = ?, cpu = ?, ram = ?, ssd = ?, hdd = ?, psu = ?, mainboard = ?, cases = ?, heatsink = ?, category_id = ?, brand_id = ?, image_url = ? WHERE id = ${id}`;
     const values = [
         data.name,
         data.description,
         data.price,
         data.quantity,
+        data.cpu,
+        data.ram,
+        data.ssd,
+        data.hdd,
+        data.psu,
+        data.mainboard,
+        data.cases,
+        data.heatsink,
         data.category_id,
         data.brand_id,
         data.image_url,

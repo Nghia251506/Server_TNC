@@ -1,11 +1,13 @@
 module.exports = function(router){
     var ProductControler = require('../Controllers/Product.controller');
+    var DetailController = require('../Controllers/ProductDetail.controller');
     var BrandController = require('../Controllers/Brand.controller');
     var CategoryController = require('../Controllers/Category.controller');
     var BillController = require('../Controllers/Bill.controller');
-    var BillDetailController = require('../Controllers/Bill_detail.controller');
     var CustomerController = require('../Controllers/Customer.controller');
     router.get('/admin/list-product', ProductControler.list);
+    router.post('/admin/add-detail', DetailController.add);
+    router.post('/admin/detailbyproductid', DetailController.DetailByProductId);
     router.post('/admin/add-product', ProductControler.add);
     router.get('/api/detail/:id', ProductControler.detail);
     router.delete('/admin/delete', ProductControler.delete);
@@ -23,6 +25,4 @@ module.exports = function(router){
     router.post('/admin/add-bill', ProductControler.getProductByCode);
     router.get('/admin/list-bill', BillController.list);
     router.post('/admin/add-bill', BillController.add);
-    router.post('/admin/bill_detail', BillDetailController.addBillDetail);
-    router.get('/admin/bill_detail/:billId',BillDetailController.getBillDetailsByBillId);
 }
