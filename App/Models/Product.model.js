@@ -15,7 +15,9 @@ const Product = function (product) {
 };
 
 Product.get_all = function (result) {
-    conn.query("SELECT p.id, p.code, p.name, p.price, p.quantity,p.image_url, p.description, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
+    const limit = 10;
+    const offset = 0;
+    conn.query(`SELECT p.id, p.code, p.name, p.price, p.quantity,p.image_url, p.description, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc`, function(err, product){
         if (err) {
             result(null, err);
         } else {

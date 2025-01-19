@@ -21,7 +21,7 @@ Customer.getBills = function (result){
 }
 
 Customer.create = function(data, callback){
-    const query = "INSERT INTO customers VALUES (?,?,?,?)";
+    const query = "INSERT INTO customers (customer_name,phone,address,birth_day) VALUES (?,?,?,?)";
     const params = [
         data.customer_name,
         data.phone,

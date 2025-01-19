@@ -7,10 +7,10 @@ module.exports = function(router){
     var CustomerController = require('../Controllers/Customer.controller');
     router.get('/admin/list-product', ProductControler.list);
     router.post('/admin/add-product', ProductControler.add);
-    router.get('/admin/detail/:id', ProductControler.detail);
+    router.get('/api/detail/:id', ProductControler.detail);
     router.delete('/admin/delete', ProductControler.delete);
     router.put('/admin/add-product/:id', ProductControler.update);
-    router.get('/admin/list-customer',CustomerController.list);
+    router.get('/admin/customers',CustomerController.list);
     router.post('/admin/add-customer', CustomerController.add);
     router.get('/admin/list-brand', BrandController.list);
     router.post('/admin/add-brand', BrandController.add);
