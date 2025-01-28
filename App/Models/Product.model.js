@@ -23,7 +23,7 @@ const Product = function (product) {
 };
 
 Product.get_all = function (result) {
-    conn.query("SELECT p.*,ca.id, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON at.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
+    conn.query("SELECT p.*,ca.id, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
         if (err) {
             result(null, err);
         } else {
