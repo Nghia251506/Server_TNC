@@ -5,14 +5,16 @@ module.exports = function(router){
     var CategoryController = require('../Controllers/Category.controller');
     var BillController = require('../Controllers/Bill.controller');
     var CustomerController = require('../Controllers/Customer.controller');
+    var SupplierController = require('../Controllers/Supplier.controller');
+    var AttributeController = require('../Controllers/Attribute.controller');
     router.get('/admin/list-product', ProductControler.list);
     router.post('/admin/add-detail', DetailController.add);
     router.post('/admin/detailbyproductid', DetailController.DetailByProductId);
     router.post('/admin/add-product', ProductControler.add);
-    router.get('/api/detail/:id', ProductControler.detail);
+    router.get('/admin/detail/:id', ProductControler.detail);
     router.delete('/admin/delete', ProductControler.delete);
     router.put('/admin/add-product/:id', ProductControler.update);
-    router.get('/admin/customers',CustomerController.list);
+    router.get('/admin/list-customer',CustomerController.list);
     router.post('/admin/add-customer', CustomerController.add);
     router.get('/admin/list-brand', BrandController.list);
     router.post('/admin/add-brand', BrandController.add);
@@ -25,4 +27,8 @@ module.exports = function(router){
     router.post('/admin/add-bill', ProductControler.getProductByCode);
     router.get('/admin/list-bill', BillController.list);
     router.post('/admin/add-bill', BillController.add);
+    router.post('/admin/add-supplier', SupplierController.add);
+    router.get('/admin/list-supplier', SupplierController.list);
+    router.put('/admin/update-supplier', SupplierController.update);
+    router.get('/admin/list-attribute', AttributeController.list);
 }
