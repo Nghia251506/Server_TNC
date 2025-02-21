@@ -27,7 +27,7 @@ exports.ClientDetailByProductId = function(req,res){
 }
 
 exports.add = function (req,res){
-    const data = req.body;
+    const data = req.body.product_id;
 
     ProductDetail.createProductDetail(data, function(err, response){
         if (err) {
