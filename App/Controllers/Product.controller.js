@@ -44,8 +44,9 @@ exports.add = function (req, res) {
     if (
         !data.name ||
         !data.description ||
-        !data.price ||
-        !data.quantity ||
+        !data.sell_price ||
+        !data.capital_price||
+        !data.stock ||
         !data.category_id ||
         !data.brand_id ||
         !data.image_url

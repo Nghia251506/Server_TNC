@@ -15,7 +15,7 @@ const Product = function (product) {
 };
 //adbcasd
 Product.get_all = function (result) {
-    conn.query("SELECT p.*,ca.id, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
+    conn.query("SELECT p.*, ca.category_name, b.brand_name from products as p INNER JOIN categories as ca ON p.category_id = ca.id INNER JOIN brands as b ON p.brand_id = b.id ORDER BY p.id desc", function(err, product){
         if (err) {
             result(null, err);
         } else {
@@ -58,12 +58,13 @@ Product.getById = function (id, result) {
 };
 
 Product.create = function (data, callback) {
-    const query = `CALL AddProductWithCode(? , ? , ? , ? ,  ? , ? , ?)`;
+    const query = `CALL AddProductWithCode(? , ? , ? , ? ,  ? , ? , ?,?)`;
     const params = [
         data.name,
         data.description,
-        data.price,
-        data.quantity,
+        data.sell_price,
+        data.capital_price,
+        data.stock,
         data.category_id,
         data.brand_id,
         data.image_url
