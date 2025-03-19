@@ -7,26 +7,65 @@ const Category = function (category) {
 };
 
 // Hàm lấy tất cả danh mục và trả về theo dạng cây phân cấp
+// Category.get_all = function (result) {
+//     conn.query("SELECT * FROM categories", function (err, categories) {
+//         if (err) {
+//             result(null, err);
+//         } else {
+//             const categoryTree = buildCategoryTree(categories);
+//             result(categoryTree);
+//         }
+//     });
+// };
+
+// Hàm lấy tất cả danh mục và trả về theo dạng cây phân cấp
 Category.get_all = function (result) {
     conn.query("SELECT * FROM categories", function (err, categories) {
         if (err) {
-            result(null, err);
+            console.log("Lỗi truy vấn danh mục:", err);
+            result(err, null);
         } else {
-            const categoryTree = buildCategoryTree(categories);
-            result(categoryTree);
+            conn.query("SELECT * FROM products", function (err, products) {
+                if (err) {
+                    console.log("Lỗi truy vấn sản phẩm:", err);
+                    result(err, null);
+                } else {
+                    console.log("Danh sách sản phẩm:", products);
+                    const categoryTree = buildCategoryTree(categories, products);
+                    console.log("Cây danh mục với sản phẩm:", categoryTree);
+                    result(null, categoryTree);
+                }
+            });
         }
     });
 };
 
+
+
+// Category.get_all = function (result) {
+//     conn.query("SELECT * FROM categories", function (err, res) {
+//         if (err) {
+//             console.log("Lỗi truy vấn danh mục:", err); // Debug lỗi
+//             result(err, null);
+//         } else {
+//             console.log("Danh mục lấy thành công:", res); // Debug dữ liệu lấy được
+//             result(null, res);
+//         }
+//     });
+// };
+
 // Hàm chuyển danh sách danh mục thành cây phân cấp
-function buildCategoryTree(categories, parentId = null) {
+function buildCategoryTree(categories, products, parentId = null) {
     return categories
-        .filter(cat => cat.parent_id === parentId)
+        .filter(cat => cat.parent_id === parentId || (cat.parent_id === 0 && parentId === null))
         .map(cat => ({
             ...cat,
-            children: buildCategoryTree(categories, cat.id),
+            children: buildCategoryTree(categories, products, cat.id),
+            products: products.filter(p => p.category_id === cat.id), // Lọc sản phẩm theo category con
         }));
 }
+
+
 
 // Lấy danh mục theo ID
 Category.getById = function (id, result) {
