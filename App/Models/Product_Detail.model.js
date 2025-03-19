@@ -20,7 +20,7 @@ ProductDetail.getProductDetailById = function(id, result){
 }
 
 ProductDetail.createProductDetail = function(productdetail, result){
-    conn.query('INSERT INTO product_details(product_id, attribute_id, val, supplier_id) VALUES (?,?,?,?,?)', productdetail, function(err, res){
+    conn.query('INSERT INTO product_details(product_id, attribute_id, val, supplier_id) VALUES (?,?,?,?)', productdetail, function(err, res){
         if(err){
             result(err, null);
         }else{
